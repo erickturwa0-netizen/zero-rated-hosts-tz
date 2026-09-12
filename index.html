@@ -197,7 +197,7 @@
   <main id="page-dashboard" class="page active">
     <div class="controls">
       <div>
-        <label for="network">Chagua Mtandao</label>
+        <label for="network">Mtandao (inagunduliwa automatic)</label>
         <select id="network">
           <option value="vodacom">Vodacom</option>
           <option value="airtel">Airtel</option>
@@ -211,6 +211,7 @@
         <input type="search" id="search" placeholder="Tafuta domain au category..." />
       </div>
     </div>
+    <p id="detect-status" style="font-size:0.8rem;color:#64748b;margin-bottom:0.75rem;">Inagundua mtandao...</p>
     <div class="meta">
       <h2>Hosts (<span id="count">0</span>)</h2>
       <span>Detection is approximate — see About</span>
@@ -355,6 +356,37 @@
       ],
     };
 
+    // Auto-detect network from public IP (works best on mobile data)
+    async function detectNetwork() {
+      const statusEl = document.getElementById("detect-status");
+      if (statusEl) statusEl.textContent = "Inagundua mtandao...";
+      try {
+        const res = await fetch("https://ipapi.co/json/", { cache: "no-store" });
+        if (!res.ok) throw new Error("lookup failed");
+        const data = await res.json();
+        const org = ((data.org || "") + " " + (data.asn || "") + " " + (data.network || "")).toLowerCase();
+        console.log("IP org:", org, data);
+
+        let detected = null;
+        if (org.includes("vodacom") || org.includes("vmn") || org.includes("safaricom")) detected = "vodacom";
+        else if (org.includes("airtel") || org.includes("bharti")) detected = "airtel";
+        else if (org.includes("tigo") || org.includes("yas") || org.includes("mic tanzania") || org.includes("millicom")) detected = "yas";
+        else if (org.includes("halotel") || org.includes("viettel") || org.includes("smile")) detected = "halotel";
+
+        if (detected) {
+          document.getElementById("network").value = detected;
+          if (statusEl) statusEl.textContent = "Imegunduliwa: " + detected.toUpperCase();
+          renderTable();
+          return detected;
+        }
+        if (statusEl) statusEl.textContent = "Haikuweza kugundua – chagua mwenyewe";
+      } catch (e) {
+        console.warn("Detect failed", e);
+        if (statusEl) statusEl.textContent = "Haikuweza kugundua (labda Wi-Fi) – chagua mwenyewe";
+      }
+      return null;
+    }
+
     function statusLabel(s) {
       return { confirmed: "Confirmed", reported: "Reported", unverified: "Unverified" }[s] || s;
     }
@@ -426,6 +458,7 @@
     }
 
     renderTable();
+    detectNetwork();
   </script>
 </body>
 </html>
