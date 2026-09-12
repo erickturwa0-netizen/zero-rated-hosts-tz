@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="sw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Zero-Rated Hosts TZ</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --border: #e2e8f0;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #2563eb;
+      --primary-hover: #1d4ed8;
+      --green: #166534;
+      --green-bg: #dcfce7;
+      --yellow: #854d0e;
+      --yellow-bg: #fef9c3;
+      --gray-bg: #f1f5f9;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    header {
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.25rem;
+    }
+    .header-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    h1 { font-size: 1.25rem; font-weight: 700; }
+    .subtitle { font-size: 0.875rem; color: var(--muted); }
+    nav { display: flex; gap: 1rem; font-size: 0.875rem; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover, nav a.active { color: var(--primary); font-weight: 600; }
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 1.5rem 1.25rem 3rem;
+    }
+    .controls {
+      display: grid;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    @media (min-width: 640px) {
+      .controls { grid-template-columns: 1fr 1fr; }
+    }
+    label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      color: #334155;
+    }
+    select, input[type="search"], input[type="text"], textarea {
+      width: 100%;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      background: white;
+    }
+    select:focus, input:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+    }
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .meta h2 { font-size: 1.125rem; }
+    .meta span { font-size: 0.75rem; color: var(--muted); }
+    .table-wrap {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      overflow: hidden;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+    th {
+      text-align: left;
+      padding: 0.75rem 1rem;
+      background: #f8fafc;
+      font-weight: 600;
+      color: #334155;
+      border-bottom: 1px solid var(--border);
+    }
+    td { padding: 0.75rem 1rem; border-bottom: 1px solid #f1f5f9; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: #f8fafc; }
+    .badge {
+      display: inline-block;
+      padding: 0.15rem 0.6rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+    .badge.confirmed { background: var(--green-bg); color: var(--green); }
+    .badge.reported { background: var(--yellow-bg); color: var(--yellow); }
+    .badge.unverified { background: var(--gray-bg); color: #475569; }
+    .empty {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      color: var(--muted);
+      border: 1px dashed var(--border);
+      border-radius: 0.75rem;
+      background: #f8fafc;
+    }
+    footer {
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.75rem;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      background: white;
+    }
+    .page { display: none; }
+    .page.active { display: block; }
+    .card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1.5rem;
+      max-width: 28rem;
+      margin: 0 auto;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 0.625rem 1rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    .btn:hover { background: var(--primary-hover); }
+    .success {
+      background: #f0fdf4;
+      border: 1px solid #bbf7d0;
+      color: #166534;
+      padding: 1.25rem;
+      border-radius: 0.75rem;
+      text-align: center;
+    }
+    .disclaimer {
+      background: #fffbeb;
+      border: 1px solid #fcd34d;
+      border-radius: 0.75rem;
+      padding: 1.25rem;
+      margin: 1.5rem 0;
+      font-size: 0.875rem;
+      color: #92400e;
+    }
+    .about-content { max-width: 40rem; margin: 0 auto; }
+    .about-content p { margin-bottom: 1rem; color: #334155; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div>
+        <h1>Zero-Rated Hosts TZ</h1>
+        <p class="subtitle">Orodha ya hosts zisizotoza data · Tanzania</p>
+      </div>
+      <nav>
+        <a href="#" class="nav-link active" data-page="dashboard">Dashboard</a>
+        <a href="#" class="nav-link" data-page="report">Report Host</a>
+        <a href="#" class="nav-link" data-page="about">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- DASHBOARD -->
+  <main id="page-dashboard" class="page active">
+    <div class="controls">
+      <div>
+        <label for="network">Chagua Mtandao</label>
+        <select id="network">
+          <option value="vodacom">Vodacom</option>
+          <option value="airtel">Airtel</option>
+          <option value="yas">Yas (Tigo)</option>
+          <option value="halotel">Halotel</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div>
+        <label for="search">Tafuta</label>
+        <input type="search" id="search" placeholder="Tafuta domain au category..." />
+      </div>
+    </div>
+    <div class="meta">
+      <h2>Hosts (<span id="count">0</span>)</h2>
+      <span>Detection is approximate — see About</span>
+    </div>
+    <div id="table-container"></div>
+  </main>
+
+  <!-- REPORT -->
+  <main id="page-report" class="page">
+    <h2 style="text-align:center;margin-bottom:1.5rem;font-size:1.5rem;">Report Zero-Rated Host</h2>
+    <div class="card">
+      <div id="report-success" class="success" style="display:none;">
+        <p style="font-weight:600;font-size:1.1rem;">Asante! Report imepokelewa.</p>
+        <p style="margin-top:0.5rem;font-size:0.875rem;">Host itakaguliwa na kuongezwa ikiwa itathibitishwa.</p>
+        <button class="btn" style="margin-top:1rem;" onclick="resetReport()">Tuma nyingine</button>
+      </div>
+      <form id="report-form">
+        <div style="margin-bottom:1rem;">
+          <label for="r-network">Mtandao</label>
+          <select id="r-network" required>
+            <option value="vodacom">Vodacom</option>
+            <option value="airtel">Airtel</option>
+            <option value="yas">Yas (Tigo)</option>
+            <option value="halotel">Halotel</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label for="r-domain">Domain</label>
+          <input type="text" id="r-domain" placeholder="mfano: example.com" required />
+        </div>
+        <div style="margin-bottom:1rem;">
+          <label for="r-category">Category</label>
+          <select id="r-category">
+            <option value="social">Social</option>
+            <option value="education">Education</option>
+            <option value="video">Video</option>
+            <option value="news">News</option>
+            <option value="government">Government</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+        <div style="margin-bottom:1.25rem;">
+          <label for="r-notes">Notes (optional)</label>
+          <textarea id="r-notes" rows="3" placeholder="Maelezo yoyote..."></textarea>
+        </div>
+        <button type="submit" class="btn">Tuma Report</button>
+      </form>
+    </div>
+  </main>
+
+  <!-- ABOUT -->
+  <main id="page-about" class="page">
+    <div class="about-content">
+      <h2 style="font-size:1.5rem;margin-bottom:1.25rem;">About</h2>
+      <p>
+        <strong>Zero-Rated Hosts TZ</strong> ni dashboard ya umma inayoonyesha orodha ya domain
+        zinazojulikana (au zilizoripotiwa) kama zero-rated kwenye mitandao ya simu ya Tanzania
+        (Vodacom, Airtel, Yas, Halotel).
+      </p>
+      <p>
+        Zero-rating inamaanisha trafiki kwenda host hiyo haikati data yako (au inakatiwa kidogo sana)
+        kulingana na mpango wa operator.
+      </p>
+      <div class="disclaimer">
+        <strong>Muhimu – Disclaimer</strong><br><br>
+        Detection is approximate only. Mobile operators use Deep Packet Inspection (DPI) and SNI matching.
+        Results shown here are <strong>not guaranteed</strong>. Zero-rating can depend on your specific plan,
+        time of day, or promotional period. Use this tool at your own risk. This project does not provide
+        free data and is not affiliated with any mobile network operator.
+      </div>
+      <p>
+        Unaweza ku-report host mpya kupitia ukurasa wa <strong>Report Host</strong>.
+        Reports zitaonekana kama “Reported” hadi zithibitishwe.
+      </p>
+      <p style="font-size:0.875rem;color:var(--muted);">
+        Android scanner app (independent) inatumia TrafficStats API kujaribu kugundua zero-rating kwenye device yako.
+        Hakuna sync kati ya webapp na Android app.
+      </p>
+    </div>
+  </main>
+
+  <footer>
+    Zero-Rated Hosts Scanner · Tanzania · Use at your own risk
+  </footer>
+
+  <script>
+    // Sample data (same as hosts.json)
+    const HOSTS = {
+      vodacom: [
+        { domain: "facebook.com", category: "social", status: "confirmed", updated: "2026-09-01" },
+        { domain: "m.facebook.com", category: "social", status: "confirmed", updated: "2026-09-01" },
+        { domain: "whatsapp.com", category: "social", status: "confirmed", updated: "2026-09-01" },
+        { domain: "web.whatsapp.com", category: "social", status: "confirmed", updated: "2026-09-01" },
+        { domain: "wikipedia.org", category: "education", status: "confirmed", updated: "2026-09-01" },
+        { domain: "en.wikipedia.org", category: "education", status: "confirmed", updated: "2026-09-01" },
+        { domain: "youtube.com", category: "video", status: "reported", updated: "2026-09-01" },
+        { domain: "m.youtube.com", category: "video", status: "reported", updated: "2026-09-01" }
+      ],
+      airtel: [
+        { domain: "facebook.com", category: "social", status: "confirmed", updated: "2026-09-01" },
+        { domain: "whatsapp.com", category: "social", status: "confirmed", updated: "2026-09-01" },
+        { domain: "youtube.com", category: "video", status: "reported", updated: "2026-09-01" },
+        { domain: "wikipedia.org", category: "education", status: "confirmed", updated: "2026-09-01" }
+      ],
+      yas: [
+        { domain: "facebook.com", category: "social", status: "confirmed", updated: "2026-09-01" },
+        { domain: "whatsapp.com", category: "social", status: "confirmed", updated: "2026-09-01" },
+        { domain: "wikipedia.org", category: "education", status: "confirmed", updated: "2026-09-01" }
+      ],
+      halotel: [
+        { domain: "facebook.com", category: "social", status: "confirmed", updated: "2026-09-01" },
+        { domain: "whatsapp.com", category: "social", status: "confirmed", updated: "2026-09-01" }
+      ],
+      other: []
+    };
+
+    function statusLabel(s) {
+      return { confirmed: "Confirmed", reported: "Reported", unverified: "Unverified" }[s] || s;
+    }
+
+    function renderTable() {
+      const network = document.getElementById("network").value;
+      const q = document.getElementById("search").value.toLowerCase().trim();
+      let list = HOSTS[network] || [];
+      if (q) {
+        list = list.filter(h =>
+          h.domain.toLowerCase().includes(q) || h.category.toLowerCase().includes(q)
+        );
+      }
+      document.getElementById("count").textContent = list.length;
+      const container = document.getElementById("table-container");
+      if (list.length === 0) {
+        container.innerHTML = '<div class="empty">Hakuna hosts zilizopatikana kwa mtandao huu.</div>';
+        return;
+      }
+      let html = `<div class="table-wrap"><table>
+        <thead><tr><th>Domain</th><th>Category</th><th>Status</th><th>Updated</th></tr></thead><tbody>`;
+      list.forEach(h => {
+        html += `<tr>
+          <td style="font-weight:500">${h.domain}</td>
+          <td style="text-transform:capitalize;color:#64748b">${h.category}</td>
+          <td><span class="badge ${h.status}">${statusLabel(h.status)}</span></td>
+          <td style="color:#64748b">${h.updated}</td>
+        </tr>`;
+      });
+      html += "</tbody></table></div>";
+      container.innerHTML = html;
+    }
+
+    // Navigation
+    document.querySelectorAll(".nav-link").forEach(link => {
+      link.addEventListener("click", e => {
+        e.preventDefault();
+        const page = link.dataset.page;
+        document.querySelectorAll(".page").forEach(p => p.classList.remove("active"));
+        document.getElementById("page-" + page).classList.add("active");
+        document.querySelectorAll(".nav-link").forEach(l => l.classList.remove("active"));
+        link.classList.add("active");
+      });
+    });
+
+    // Events
+    document.getElementById("network").addEventListener("change", renderTable);
+    document.getElementById("search").addEventListener("input", renderTable);
+
+    // Report form
+    document.getElementById("report-form").addEventListener("submit", e => {
+      e.preventDefault();
+      const data = {
+        network: document.getElementById("r-network").value,
+        domain: document.getElementById("r-domain").value,
+        category: document.getElementById("r-category").value,
+        notes: document.getElementById("r-notes").value
+      };
+      console.log("Report submitted:", data);
+      // Store in localStorage for demo
+      const reports = JSON.parse(localStorage.getItem("zr_reports") || "[]");
+      reports.push({ ...data, ts: new Date().toISOString() });
+      localStorage.setItem("zr_reports", JSON.stringify(reports));
+      document.getElementById("report-form").style.display = "none";
+      document.getElementById("report-success").style.display = "block";
+    });
+
+    function resetReport() {
+      document.getElementById("report-form").style.display = "block";
+      document.getElementById("report-success").style.display = "none";
+      document.getElementById("r-domain").value = "";
+      document.getElementById("r-notes").value = "";
+    }
+
+    // Init
+    renderTable();
+  </script>
+</body>
+</html>

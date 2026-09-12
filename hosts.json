@@ -1,0 +1,28 @@
+{
+  "vodacom": [
+    { "domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "m.facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "web.whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "en.wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "youtube.com", "category": "video", "status": "reported", "updated": "2026-09-01" },
+    { "domain": "m.youtube.com", "category": "video", "status": "reported", "updated": "2026-09-01" }
+  ],
+  "airtel": [
+    { "domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "youtube.com", "category": "video", "status": "reported", "updated": "2026-09-01" },
+    { "domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01" }
+  ],
+  "yas": [
+    { "domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01" }
+  ],
+  "halotel": [
+    { "domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
+    { "domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" }
+  ],
+  "other": []
+}
