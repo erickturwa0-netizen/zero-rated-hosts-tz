@@ -1,28 +1,58 @@
 {
   "vodacom": [
-    { "domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "m.facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "web.whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "en.wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "youtube.com", "category": "video", "status": "reported", "updated": "2026-09-01" },
-    { "domain": "m.youtube.com", "category": "video", "status": "reported", "updated": "2026-09-01" }
+    {"domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "m.facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "web.whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "whatsapp.net", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "instagram.com", "category": "social", "status": "reported", "updated": "2026-09-01"},
+    {"domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "en.wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "sw.wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "youtube.com", "category": "video", "status": "reported", "updated": "2026-09-01"},
+    {"domain": "m.youtube.com", "category": "video", "status": "reported", "updated": "2026-09-01"},
+    {"domain": "vodacom.co.tz", "category": "operator", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "mpesa.vodacom.co.tz", "category": "operator", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "tz.goodinternet.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "goodinternet.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "edx.org", "category": "education", "status": "reported", "updated": "2026-09-01"},
+    {"domain": "who.int", "category": "health", "status": "reported", "updated": "2026-09-01"},
+    {"domain": "thecitizen.co.tz", "category": "news", "status": "reported", "updated": "2026-09-01"}
   ],
   "airtel": [
-    { "domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "youtube.com", "category": "video", "status": "reported", "updated": "2026-09-01" },
-    { "domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01" }
+    {"domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "m.facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "web.whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "instagram.com", "category": "social", "status": "reported", "updated": "2026-09-01"},
+    {"domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "en.wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "youtube.com", "category": "video", "status": "reported", "updated": "2026-09-01"},
+    {"domain": "airtel.co.tz", "category": "operator", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "tz.goodinternet.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "edx.org", "category": "education", "status": "reported", "updated": "2026-09-01"},
+    {"domain": "who.int", "category": "health", "status": "reported", "updated": "2026-09-01"}
   ],
   "yas": [
-    { "domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01" }
+    {"domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "web.whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "en.wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "yas.co.tz", "category": "operator", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "tigo.co.tz", "category": "operator", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "tz.goodinternet.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "edx.org", "category": "education", "status": "reported", "updated": "2026-09-01"}
   ],
   "halotel": [
-    { "domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" },
-    { "domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01" }
+    {"domain": "facebook.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "whatsapp.com", "category": "social", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "halotel.co.tz", "category": "operator", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "tz.goodinternet.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"}
   ],
-  "other": []
+  "other": [
+    {"domain": "wikipedia.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"},
+    {"domain": "tz.goodinternet.org", "category": "education", "status": "confirmed", "updated": "2026-09-01"}
+  ]
 }
